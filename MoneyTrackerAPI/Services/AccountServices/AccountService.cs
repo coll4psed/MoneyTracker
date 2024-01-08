@@ -1,9 +1,10 @@
-﻿using MoneyTrackerAPI.Contexts;
+﻿using Microsoft.EntityFrameworkCore;
+using MoneyTrackerAPI.Contexts;
 using MoneyTrackerAPI.Models;
 
 namespace MoneyTrackerAPI.Services.AccountServices
 {
-    public class AccountService : IAccountService
+    public class AccountService : IAccountRepository
     {
         private readonly MoneyTrackerContext _context;
 
@@ -13,9 +14,33 @@ namespace MoneyTrackerAPI.Services.AccountServices
                 throw new ArgumentNullException(nameof(context));
         }
 
-        public IEnumerable<Account> Get()
+        public async Task<IEnumerable<Account>> GetAccountsAsync()
         {
-            
+            return await _context.Accounts.OrderBy(a => a.AccountName).ToListAsync();
+        }
+
+        public async Task<Account?> GetAccountAsync(int accId)
+        {
+            return await _context.Accounts
+                .Where(a => a.Id == accId).FirstOrDefaultAsync();
+        }
+
+        public async Task<bool> AccountExistsAsync(int accId)
+        {
+            return await _context.Accounts.AnyAsync(a => a.Id == accId);
+        }
+
+        public async Task AddAccount(Account account)
+        {
+            if (!await _context.Accounts.AnyAsync(a => a.AccountName == account.AccountName))
+            {
+                _context.Accounts.Add(account);
+            }
+        }
+
+        public async Task<bool> SaveChangesAsync()
+        {
+            return await _context.SaveChangesAsync() >= 0;
         }
     }
 }
