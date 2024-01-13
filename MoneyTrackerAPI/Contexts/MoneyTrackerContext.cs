@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MoneyTrackerAPI.Models;
+using MoneyTrackerAPI.Entities;
 
 namespace MoneyTrackerAPI.Contexts
 {

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace MoneyTrackerAPI.Models
+namespace MoneyTrackerAPI.Entities
 {
     public class IncomeCategory
     {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MoneyTrackerAPI.Contexts;
-using MoneyTrackerAPI.Models;
+using MoneyTrackerAPI.Entities;
 
 namespace MoneyTrackerAPI.Services.AccountServices
 {
@@ -22,7 +22,8 @@ namespace MoneyTrackerAPI.Services.AccountServices
         public async Task<Account?> GetAccountAsync(int accId)
         {
             return await _context.Accounts
-                .Where(a => a.Id == accId).FirstOrDefaultAsync();
+                .Where(a => a.Id == accId)
+                .FirstOrDefaultAsync();
         }
 
         public async Task<bool> AccountExistsAsync(int accId)
@@ -30,12 +31,14 @@ namespace MoneyTrackerAPI.Services.AccountServices
             return await _context.Accounts.AnyAsync(a => a.Id == accId);
         }
 
-        public async Task AddAccount(Account account)
+        public void AddAccount(Account account)
         {
-            if (!await _context.Accounts.AnyAsync(a => a.AccountName == account.AccountName))
-            {
-                _context.Accounts.Add(account);
-            }
+            _context.Accounts.Add(account);
+        }
+
+        public void DeleteAccount(Account account)
+        {
+            _context.Accounts.Remove(account);
         }
 
         public async Task<bool> SaveChangesAsync()

@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace MoneyTrackerAPI.Models
+namespace MoneyTrackerAPI.Entities
 {
-    public class Income
+    public class Expense
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -13,14 +13,14 @@ namespace MoneyTrackerAPI.Models
         public decimal Value { get; set; }
         [Required]
         [DataType(DataType.Date)]
-        public DateOnly IncomeDate { get; set; }
+        public DateOnly ExpenseDate { get; set; }
         [MaxLength(255)]
         public string Comment { get; set; } = null!;
 
-        public int IncomeCategoryId { get; set; }
+        public int ExpenseCategoryId { get; set; }
         public int AccountId { get; set; }
 
-        public IncomeCategory? IncomeCategory { get; set; }
+        public ExpenseCategory? ExpenseCategory { get; set; }
         public Account? Account { get; set; }
     }
 }

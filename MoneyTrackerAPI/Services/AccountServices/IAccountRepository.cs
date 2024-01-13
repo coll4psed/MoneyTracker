@@ -1,4 +1,4 @@
-﻿using MoneyTrackerAPI.Models;
+﻿using MoneyTrackerAPI.Entities;
 
 namespace MoneyTrackerAPI.Services.AccountServices
 {
@@ -7,7 +7,8 @@ namespace MoneyTrackerAPI.Services.AccountServices
         Task<IEnumerable<Account>> GetAccountsAsync();
         Task<Account?> GetAccountAsync(int accId);
         Task<bool> AccountExistsAsync(int accId);
-        Task AddAccount(Account account);
+        void AddAccount(Account account);
+        void DeleteAccount(Account account);
         Task<bool> SaveChangesAsync();
     }
 }
