@@ -15,7 +15,7 @@ namespace MoneyTrackerAPI.Entities
         [DataType(DataType.Date)]
         public DateOnly IncomeDate { get; set; }
         [MaxLength(255)]
-        public string Comment { get; set; } = null!;
+        public string? Comment { get; set; } = string.Empty;
 
         public int IncomeCategoryId { get; set; }
         public int AccountId { get; set; }

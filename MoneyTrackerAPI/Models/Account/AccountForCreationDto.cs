@@ -1,9 +1,13 @@
-﻿namespace MoneyTrackerAPI.Models.Account
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace MoneyTrackerAPI.Models.Account
 {
     public class AccountForCreationDto
     {
-        public int Id { get; set; }
+        [DataType(DataType.Currency)]
         public decimal Value { get; set; }
+
+        [MaxLength(40)]
         public string AccountName { get; set; } = null!;
     }
 }

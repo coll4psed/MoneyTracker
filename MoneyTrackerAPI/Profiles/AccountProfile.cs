@@ -6,7 +6,7 @@ namespace MoneyTrackerAPI.Profiles
     {
         public AccountProfile()
         {
-            CreateMap<Entities.Account, Models.Account.AccountDto>();
+            CreateMap<Entities.Account, Models.Account.AccountWithoutExpenseAndIncomeDto>();
             CreateMap<Models.Account.AccountForCreationDto, Entities.Account>();
             CreateMap<Models.Account.AccountForUpdateDto, Entities.Account>();
             CreateMap<Entities.Account, Models.Account.AccountForUpdateDto>();

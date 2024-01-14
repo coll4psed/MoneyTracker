@@ -15,7 +15,7 @@ namespace MoneyTrackerAPI.Entities
         [DataType(DataType.Date)]
         public DateOnly ExpenseDate { get; set; }
         [MaxLength(255)]
-        public string Comment { get; set; } = null!;
+        public string? Comment { get; set; } = string.Empty;
 
         public int ExpenseCategoryId { get; set; }
         public int AccountId { get; set; }

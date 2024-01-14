@@ -23,43 +23,43 @@ namespace MoneyTrackerAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<AccountDto>>> GetAccounts()
+        public async Task<ActionResult<IEnumerable<AccountWithoutExpenseAndIncomeDto>>> GetAccounts()
         {
             var accounts = await _accountRepository.GetAccountsAsync();
 
-            return Ok(_mapper.Map<IEnumerable<AccountDto>>(accounts));
+            return Ok(_mapper.Map<IEnumerable<AccountWithoutExpenseAndIncomeDto>>(accounts));
         }
 
-        [HttpGet("{id}", Name = "GetAccount")]
-        public async Task<IActionResult> GetAccount(int id)
+        [HttpGet("{accountid}", Name = "GetAccount")]
+        public async Task<ActionResult<AccountWithoutExpenseAndIncomeDto>> GetAccount(int accountId)
         {
-            var account = await _accountRepository.GetAccountAsync(id);
+            var account = await _accountRepository.GetAccountAsync(accountId);
 
             if (account == null)
             {
                 return NotFound();
             }
 
-            return Ok(_mapper.Map<AccountDto>(account));
+            return Ok(_mapper.Map<AccountWithoutExpenseAndIncomeDto>(account));
         }
 
         [HttpPost]
-        public async Task<ActionResult<AccountDto>> CreateAccount(
-            Account account)
+        public async Task<ActionResult<AccountForCreationDto>> CreateAccount(
+            AccountForCreationDto account)
         {
             var finalAccount = _mapper.Map<Account>(account);
 
-            _accountRepository.AddAccount(account);
+            _accountRepository.AddAccount(finalAccount);
 
             await _accountRepository.SaveChangesAsync();
 
             var createdAccountToReturn =
-                _mapper.Map<AccountDto>(finalAccount);
+                _mapper.Map<AccountWithoutExpenseAndIncomeDto>(finalAccount);
 
             return CreatedAtRoute("GetAccount",
                 new
                 {
-                    id = createdAccountToReturn.Id
+                    accountId = createdAccountToReturn.Id
                 },
                 createdAccountToReturn);
         }
@@ -85,12 +85,12 @@ namespace MoneyTrackerAPI.Controllers
         }
 
         [HttpPatch("{accountid}")]
-        public async Task<ActionResult> PartiallyUpdateAccount(
-            int accId,
+        public async Task<ActionResult> PartiallyUpdateAccountInfo(
+            int accountId,
             JsonPatchDocument<AccountForUpdateDto> patchDocument)
         {
             var accountEntity = await _accountRepository
-                .GetAccountAsync(accId);
+                .GetAccountAsync(accountId);
 
             if (accountEntity == null)
             {
@@ -114,6 +114,24 @@ namespace MoneyTrackerAPI.Controllers
 
             _mapper.Map(accountToPatch, accountEntity);
 
+            await _accountRepository.SaveChangesAsync();
+
+            return NoContent();
+        }
+
+        [HttpDelete("{accountId}")]
+        public async Task<ActionResult> DeleteAccount(
+            int accountId)
+        {
+            var accountEntity = await _accountRepository
+                .GetAccountAsync(accountId);
+
+            if (accountEntity == null)
+            {
+                return NotFound();
+            }
+
+            _accountRepository.DeleteAccount(accountEntity);
             await _accountRepository.SaveChangesAsync();
 
             return NoContent();
