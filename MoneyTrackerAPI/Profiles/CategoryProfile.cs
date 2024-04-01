@@ -10,6 +10,7 @@ namespace MoneyTrackerAPI.Profiles
             CreateMap<Models.Category.CategoryForCreationDto, Entities.Category>();
             CreateMap<Models.Category.CategoryForUpdateDto, Entities.Category>();
             CreateMap<Entities.Category, Models.Category.CategoryForUpdateDto>();
+            CreateMap<Models.Category.ExpenseCategoryForCreationDto, Entities.Category>();
         }
     }
 }

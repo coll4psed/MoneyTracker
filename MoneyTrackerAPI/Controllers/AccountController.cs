@@ -31,9 +31,11 @@ namespace MoneyTrackerAPI.Controllers
         }
 
         [HttpGet("{accountid}", Name = "GetAccount")]
-        public async Task<ActionResult<AccountWithoutExpenseAndIncomeDto>> GetAccount(int accountId)
+        public async Task<ActionResult<AccountWithoutExpenseAndIncomeDto>> GetAccount(
+            int accountId)
         {
-            var account = await _accountRepository.GetAccountAsync(accountId);
+            var account = await _accountRepository
+                .GetAccountAsync(accountId);
 
             if (account == null)
             {
@@ -44,7 +46,7 @@ namespace MoneyTrackerAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<AccountForCreationDto>> CreateAccount(
+        public async Task<ActionResult<AccountWithoutExpenseAndIncomeDto>> CreateAccount(
             AccountForCreationDto account)
         {
             var finalAccount = _mapper.Map<Account>(account);
@@ -97,8 +99,8 @@ namespace MoneyTrackerAPI.Controllers
                 return NotFound();
             }
 
-            var accountToPatch = _mapper.Map<AccountForUpdateDto>(
-                accountEntity);
+            var accountToPatch = _mapper
+                .Map<AccountForUpdateDto>(accountEntity);
 
             patchDocument.ApplyTo(accountToPatch, ModelState);
 
@@ -132,6 +134,7 @@ namespace MoneyTrackerAPI.Controllers
             }
 
             _accountRepository.DeleteAccount(accountEntity);
+            
             await _accountRepository.SaveChangesAsync();
 
             return NoContent();
