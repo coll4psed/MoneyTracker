@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MoneyTrackerAPI.Contexts;
+using MoneyTrackerAPI.Context;
 using MoneyTrackerAPI.Entities;
 
 namespace MoneyTrackerAPI.Services.AccountServices
@@ -16,7 +16,7 @@ namespace MoneyTrackerAPI.Services.AccountServices
 
         public async Task<IEnumerable<Account>> GetAccountsAsync()
         {
-            return await _context.Accounts.OrderBy(a => a.AccountName).ToListAsync();
+            return await _context.Accounts.OrderBy(a => a.Name).ToListAsync();
         }
 
         public async Task<Account?> GetAccountAsync(int accId)

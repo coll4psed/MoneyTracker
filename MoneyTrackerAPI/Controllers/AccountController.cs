@@ -23,15 +23,15 @@ namespace MoneyTrackerAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<AccountWithoutExpenseAndIncomeDto>>> GetAccounts()
+        public async Task<ActionResult<IEnumerable<AccountDto>>> GetAccounts()
         {
             var accounts = await _accountRepository.GetAccountsAsync();
 
-            return Ok(_mapper.Map<IEnumerable<AccountWithoutExpenseAndIncomeDto>>(accounts));
+            return Ok(_mapper.Map<IEnumerable<AccountDto>>(accounts));
         }
 
         [HttpGet("{accountid}", Name = "GetAccount")]
-        public async Task<ActionResult<AccountWithoutExpenseAndIncomeDto>> GetAccount(
+        public async Task<ActionResult<AccountDto>> GetAccount(
             int accountId)
         {
             var account = await _accountRepository
@@ -42,11 +42,11 @@ namespace MoneyTrackerAPI.Controllers
                 return NotFound();
             }
 
-            return Ok(_mapper.Map<AccountWithoutExpenseAndIncomeDto>(account));
+            return Ok(_mapper.Map<AccountDto>(account));
         }
 
         [HttpPost]
-        public async Task<ActionResult<AccountWithoutExpenseAndIncomeDto>> CreateAccount(
+        public async Task<ActionResult<AccountDto>> CreateAccount(
             AccountForCreationDto account)
         {
             var finalAccount = _mapper.Map<Account>(account);
@@ -56,7 +56,7 @@ namespace MoneyTrackerAPI.Controllers
             await _accountRepository.SaveChangesAsync();
 
             var createdAccountToReturn =
-                _mapper.Map<AccountWithoutExpenseAndIncomeDto>(finalAccount);
+                _mapper.Map<AccountDto>(finalAccount);
 
             return CreatedAtRoute("GetAccount",
                 new

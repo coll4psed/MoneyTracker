@@ -12,6 +12,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoneyTrackerTests", "MoneyTrackerTests\MoneyTrackerTests.csproj", "{5AC135AD-2420-47F3-B95A-7DF97F655955}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,6 +30,10 @@ Global
 		{138FB519-5514-4D2F-A796-115E48CA2434}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{138FB519-5514-4D2F-A796-115E48CA2434}.Release|Any CPU.Build.0 = Release|Any CPU
 		{138FB519-5514-4D2F-A796-115E48CA2434}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{5AC135AD-2420-47F3-B95A-7DF97F655955}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AC135AD-2420-47F3-B95A-7DF97F655955}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AC135AD-2420-47F3-B95A-7DF97F655955}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AC135AD-2420-47F3-B95A-7DF97F655955}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

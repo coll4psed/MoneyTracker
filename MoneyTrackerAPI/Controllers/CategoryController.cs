@@ -31,7 +31,7 @@ namespace MoneyTrackerAPI.Controllers
             return Ok(_mapper.Map<IEnumerable<CategoryDto>>(categories));
         }
 
-        [HttpGet("{categoryid}", Name = "GetCategory")]
+        [HttpGet("{categoryId}", Name = "GetCategory")]
         public async Task<IActionResult> GetCategory(int categoryId)
         {
             var category = await _categoryRepository
@@ -86,7 +86,7 @@ namespace MoneyTrackerAPI.Controllers
             return NoContent();
         }
 
-        [HttpPatch("{categoryid}")]
+        [HttpPatch("{categoryId}")]
         public async Task<ActionResult> PartiallyUpdateCategoryInfo(
             int categoryId,
             JsonPatchDocument<CategoryForUpdateDto> patchDocument)
@@ -121,7 +121,7 @@ namespace MoneyTrackerAPI.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{categoryid}")]
+        [HttpDelete("{categoryId}")]
         public async Task<ActionResult> DeleteCategory(
             int categoryId)
         {

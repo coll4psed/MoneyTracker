@@ -1,11 +1,11 @@
 using Microsoft.EntityFrameworkCore;
-using MoneyTrackerAPI.Contexts;
+using MoneyTrackerAPI.Context;
 using Microsoft.AspNetCore.StaticFiles;
 using System.Reflection;
 using MoneyTrackerAPI.Services.AccountServices;
 using MoneyTrackerAPI.Services.CategoryServices;
-using MoneyTrackerAPI.Services.ExpenseServices;
-using MoneyTrackerAPI.Services.IncomeServices;
+using MoneyTrackerAPI.Services.OperationServices;
+using MoneyTrackerAPI.Services.CategoryTypeServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,8 +28,8 @@ builder.Services.AddSingleton<FileExtensionContentTypeProvider>();
 
 builder.Services.AddScoped<IAccountRepository, AccountService>();
 builder.Services.AddScoped<ICategoryRepository, CategoryService>();
-builder.Services.AddScoped<IExpenseRepository, ExpenseService>();
-builder.Services.AddScoped<IIncomeRepository, IncomeService>();
+builder.Services.AddScoped<IOperationRepository, OperationService>();
+builder.Services.AddScoped<ICategoryTypeRepository, CategoryTypeService>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

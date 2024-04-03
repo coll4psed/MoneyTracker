@@ -1,18 +1,17 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.Collections.Generic;
 
-namespace MoneyTrackerAPI.Entities
+namespace MoneyTrackerAPI.Entities;
+
+public partial class Category
 {
-    public class Category
-    {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-        [Required]
-        [MaxLength(50)]
-        public string CategoryName { get; set; } = null!;
+    public long Id { get; set; }
 
-        public List<ExpenseCategory> ExpensesCategory { get; set; } = new();
-        public List<IncomeCategory> IncomesCategory { get; set; } = new();
-    }
+    public string Name { get; set; } = null!;
+
+    public long CategoryTypeId { get; set; }
+
+    public virtual CategoryType CategoryType { get; set; } = null!;
+
+    public virtual ICollection<Operation> Operations { get; set; } = new List<Operation>();
 }

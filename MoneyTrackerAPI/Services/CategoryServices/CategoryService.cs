@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MoneyTrackerAPI.Contexts;
+using MoneyTrackerAPI.Context;
 using MoneyTrackerAPI.Entities;
 
 namespace MoneyTrackerAPI.Services.CategoryServices
@@ -17,7 +17,7 @@ namespace MoneyTrackerAPI.Services.CategoryServices
         public async Task<IEnumerable<Category>> GetCategoriesAsync()
         {
             return await _context.Categories
-                .OrderBy(c => c.CategoryName)
+                .OrderBy(c => c.Name)
                 .ToListAsync();
         }
 

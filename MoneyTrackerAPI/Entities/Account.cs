@@ -1,21 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.Collections.Generic;
 
-namespace MoneyTrackerAPI.Entities
+namespace MoneyTrackerAPI.Entities;
+
+public partial class Account
 {
-    public class Account
-    {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
-        [Required]
-        [DataType(DataType.Currency)]
-        public decimal Value { get; set; }
-        [Required]
-        [MaxLength(40)]
-        public string AccountName { get; set; } = null!;
+    public long Id { get; set; }
 
-        public List<Expense> Expenses { get; set; } = new();
-        public List<Income> Incomes { get; set; } = new();
-    }
+    public decimal Value { get; set; }
+
+    public string Name { get; set; } = null!;
+
+    public virtual ICollection<Operation> Operations { get; set; } = new List<Operation>();
 }
